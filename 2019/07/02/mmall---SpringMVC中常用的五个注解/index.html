@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="mmall—SpringMVC中常用的五个注解@controller 在SpringMVC 中，控制器Controller负责处理由DispatcherServlet分发的请求，把用户请求的数据经过业务处理层处理之后封装成一个Model,然后再把该Model返回给对应的View进行展示。在SpringMVC中提供了一个简便定义Controller的方法，只需使用@Controller标记一个类是C">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-02T07:22:25.899Z">
+<meta property="og:updated_time" content="2019-07-02T07:31:57.389Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
 <meta name="twitter:description" content="mmall—SpringMVC中常用的五个注解@controller 在SpringMVC 中，控制器Controller负责处理由DispatcherServlet分发的请求，把用户请求的数据经过业务处理层处理之后封装成一个Model,然后再把该Model返回给对应的View进行展示。在SpringMVC中提供了一个简便定义Controller的方法，只需使用@Controller标记一个类是C">
@@ -92,7 +92,9 @@
 <p>produces:    指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回；</p>
 <h3 id="3、params，headers"><a href="#3、params，headers" class="headerlink" title="3、params，headers"></a>3、params，headers</h3><p>params： 指定request中必须包含某些参数值是，才让该方法处理。</p>
 <p>headers： 指定request中必须包含某些指定的header值，才能让该方法处理请求。</p>
-<h2 id="Resource和-Autowired"><a href="#Resource和-Autowired" class="headerlink" title="@Resource和@Autowired"></a>@Resource和@Autowired</h2><h2 id="使用-RequestParam-绑定-HttpServletRequest-请求参数到控制器方法参数"><a href="#使用-RequestParam-绑定-HttpServletRequest-请求参数到控制器方法参数" class="headerlink" title="使用 @RequestParam 绑定 HttpServletRequest 请求参数到控制器方法参数"></a>使用 @RequestParam 绑定 HttpServletRequest 请求参数到控制器方法参数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   <span class="meta">@RequestMapping</span> ( <span class="string">"requestParam"</span> )</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testRequestParam</span><span class="params">( @RequestParam(required=<span class="keyword">false</span>)</span> String name,@<span class="title">RequestParam</span> <span class="params">( <span class="string">"age"</span> )</span> <span class="keyword">int</span> age) </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="string">"requestParam"</span> ;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Resource和-Autowired"><a href="#Resource和-Autowired" class="headerlink" title="@Resource和@Autowired"></a>@Resource和@Autowired</h2><p>​    @Resource默认按照ByName自动注入，由J2EE提供，需要导入包javax.annotation.Resource。@Resource有两个重要的属性：name和type，而Spring将@Resource注解的name属性解析为bean的名字，而type属性则解析为bean的类型。所以，如果使用name属性，则使用byName的自动注入策略，而使用type属性时则使用byType自动注入策略。如果既不制定name也不制定type属性，这时将通过反射机制使用byName自动注入策略。</p>
+<p> @Autowired注解是按照类型（byType）装配依赖对象，默认情况下它要求依赖对象必须存在，如果允许null值，可以设置它的required属性为false。如果我们想使用按照名称（byName）来装配，可以结合@Qualifier注解一起使用。</p>
+<h2 id="使用-RequestParam-绑定-HttpServletRequest-请求参数到控制器方法参数"><a href="#使用-RequestParam-绑定-HttpServletRequest-请求参数到控制器方法参数" class="headerlink" title="使用 @RequestParam 绑定 HttpServletRequest 请求参数到控制器方法参数"></a>使用 @RequestParam 绑定 HttpServletRequest 请求参数到控制器方法参数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   <span class="meta">@RequestMapping</span> ( <span class="string">"requestParam"</span> )</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testRequestParam</span><span class="params">( @RequestParam(required=<span class="keyword">false</span>)</span> String name,@<span class="title">RequestParam</span> <span class="params">( <span class="string">"age"</span> )</span> <span class="keyword">int</span> age) </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="string">"requestParam"</span> ;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
 <p>​    </p>
 <p>  上面代码中利用@RequestParam 从HttpServletRequest 中绑定了参数name到控制器方法参数name ，绑定了参数age 到控制器方法参数age 。如果我访问/requestParam.do?name=hello&amp;age=1 则Spring 将会把request请求参数name 的值hello 赋给对应的处理方法参数name ，把参数age的值1赋给对应的处理方法参数age </p>
@@ -104,7 +106,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/02/mmall---SpringMVC中常用的五个注解/" data-id="cjxlhk1jg0001usv6t86j6e22" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/02/mmall---SpringMVC中常用的五个注解/" data-id="cjxli9lfo0001v0v62h8you5f" class="article-share-link">Share</a>
       
       
     </footer>
